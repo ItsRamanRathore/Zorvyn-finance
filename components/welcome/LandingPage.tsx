@@ -196,73 +196,53 @@ export const LandingPage: React.FC = () => {
               <Button variant="secondary" size="lg">Explore the Platform</Button>
             </motion.div>
 
-            <motion.div variants={fadeInUp}>
-              <SavingsCalculator />
-            </motion.div>
           </motion.div>
         </div>
 
         <motion.div 
-          className={styles.mockupContainer}
+          className={styles.heroImageContainer}
           initial={{ opacity: 0, rotateY: 20, x: 50, scale: 0.9 }}
           animate={{ opacity: 1, rotateY: 0, x: 0, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
         >
-          <div className={styles.mockupBase}>
-            <div className={styles.mockupHeader}>
-              <div className={styles.mockupDot} />
-              <div className={styles.mockupDot} />
-              <div className={styles.mockupDot} />
-            </div>
-            <div className={styles.mockupContent}>
-              <div className={styles.sidebar}>
-                <div className={styles.sidebarItem} />
-                <div className={styles.sidebarItem} />
-                <div className={styles.sidebarItem} />
-                <div className={styles.sidebarItem} />
-              </div>
-              <div className={styles.mainArea}>
-                <div className={styles.gridStats}>
-                  <div className={styles.statCard} />
-                  <div className={styles.statCard} />
-                  <div className={styles.statCard} />
-                </div>
-                <div className={styles.chartArea}>
-                  {[40, 70, 50, 90, 60].map((h, i) => (
-                    <motion.div 
-                      key={i}
-                      className={styles.bar} 
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      transition={{ delay: 1.5 + (i * 0.1), duration: 1 }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className={styles.dashboardPreview}>
+            <img 
+              src="/dashboard-preview.png" 
+              alt="Zorvyn Premium Dashboard UI" 
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
           </div>
+
+          <motion.div 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            style={{ position: 'absolute', bottom: '-40px', left: '-80px', zIndex: 20, transform: 'scale(0.85)', transformOrigin: 'bottom left' }}
+          >
+            <SavingsCalculator />
+          </motion.div>
           
           <motion.div 
-            className={clsx(styles.overlayCard, styles.overlay1)}
+            className={styles.floatingCard1}
             initial={{ y: 20, opacity: 0, scale: 0.8 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 2, duration: 0.6 }}
           >
             <CheckCircle2 color="#10b981" size={24} />
-            <div className={styles.overlayContent}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span>Sub Optimization</span>
               <strong>Saved • $42.50/mo</strong>
             </div>
           </motion.div>
 
           <motion.div 
-            className={clsx(styles.overlayCard, styles.overlay2)}
+            className={styles.floatingCard2}
             initial={{ y: -20, opacity: 0, scale: 0.8 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 2.4, duration: 0.6 }}
           >
             <Lock color="#6366f1" size={24} />
-            <div className={styles.overlayContent}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span>Data Integrity</span>
               <strong>100% Secured</strong>
             </div>

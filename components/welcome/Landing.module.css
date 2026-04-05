@@ -234,7 +234,7 @@
 .dashboardPreview {
   width: 100%;
   max-width: 650px;
-  height: 450px;
+  height: auto;
   background: var(--card);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
@@ -242,7 +242,6 @@
   backdrop-filter: var(--glass-blur);
   overflow: hidden;
   display: flex;
-  flex-direction: column;
 }
 
 .previewHeader {
@@ -613,7 +612,6 @@
   gap: 1.25rem;
   position: relative;
   z-index: 2;
-  margin-top: 3rem;
 }
 
 .calcHeader {
@@ -659,6 +657,7 @@
   transition: all 0.2s ease;
   position: relative;
   text-align: left;
+  color: var(--foreground);
 }
 
 .subItem:hover {

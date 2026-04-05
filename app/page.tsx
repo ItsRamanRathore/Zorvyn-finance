@@ -19,7 +19,7 @@ import { LandingPage } from '@/components/welcome/LandingPage';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
-  const { setTransactions, transactions, role, isAuthenticated } = useStore();
+  const { setTransactions, transactions, role, isAuthenticated, currentUser } = useStore();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,7 +50,7 @@ export default function DashboardPage() {
       <header className={styles.pageHeader}>
         <div className={styles.welcomeSection}>
           <h1 className={styles.title}>Financial Overview</h1>
-          <p className={styles.subtitle}>Welcome back, Alex. Here's what's happening with your money.</p>
+          <p className={styles.subtitle}>Welcome back, {currentUser?.name || 'User'}. Here's what's happening with your money.</p>
         </div>
         
         <div className={styles.pageActions}>
