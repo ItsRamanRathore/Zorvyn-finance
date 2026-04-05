@@ -308,6 +308,10 @@
   width: 100%;
 }
 
+.inputWrapper .formInput {
+  padding-left: 2.75rem;
+}
+
 .formLabel {
   font-size: 0.875rem;
   font-weight: 600;
@@ -316,7 +320,7 @@
 
 .formInput {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 2rem 0.75rem 0.75rem;
   background: var(--secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
