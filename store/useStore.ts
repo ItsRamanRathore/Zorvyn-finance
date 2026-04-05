@@ -22,6 +22,7 @@ interface FinanceState {
   setTheme: (theme: 'light' | 'dark') => void;
   login: (email: string, password: string) => boolean;
   register: (userData: Omit<UserAccount, 'id' | 'createdAt'>) => void;
+  updateUser: (userData: Partial<UserAccount>) => void;
   logout: () => void;
 }
 
@@ -92,6 +93,15 @@ export const useStore = create<FinanceState>()(
           isAuthenticated: true,
           currentUser: newUser,
           role: newUser.role
+        };
+      }),
+
+      updateUser: (userData) => set((state) => {
+        if (!state.currentUser) return state;
+        const updatedUser = { ...state.currentUser, ...userData };
+        return {
+          currentUser: updatedUser,
+          users: state.users.map(u => u.id === updatedUser.id ? updatedUser : u),
         };
       }),
 

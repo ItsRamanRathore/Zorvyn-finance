@@ -5,20 +5,28 @@ import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import styles from './Settings.module.css';
 import { User, Mail, Bell, Shield, Moon, Sun } from 'lucide-react';
+import { useStore } from '../../store/useStore';
 
 export const ProfileForm: React.FC = () => {
+  const { currentUser, updateUser, theme, setTheme } = useStore();
+
   const [profile, setProfile] = useState({
-    name: 'Alex Johnson',
-    email: 'alex.j@example.com',
-    notifications: true,
-    darkMode: true,
+    name: currentUser?.name || '',
+    email: currentUser?.email || '',
+    notifications: true
   });
+
+  const handleUpdateProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateUser({ name: profile.name, email: profile.email });
+    // In a real app we might show a toast here
+  };
 
   return (
     <div className={styles.settingsGrid}>
       <Card className={styles.settingsCard}>
         <h3 className={styles.cardTitle}>Profile Information</h3>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleUpdateProfile}>
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Full Name</label>
             <div className={styles.inputWrapper}>
@@ -44,7 +52,7 @@ export const ProfileForm: React.FC = () => {
             </div>
           </div>
           <div className={styles.formActions}>
-            <Button variant="primary">Update Profile</Button>
+            <Button variant="primary" type="submit">Update Profile</Button>
           </div>
         </form>
       </Card>
@@ -85,8 +93,8 @@ export const ProfileForm: React.FC = () => {
             <label className={styles.switch}>
               <input 
                 type="checkbox" 
-                checked={profile.darkMode}
-                onChange={(e) => setProfile({ ...profile, darkMode: e.target.checked })}
+                checked={theme === 'dark'}
+                onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
               />
               <span className={styles.slider} />
             </label>

@@ -27,7 +27,7 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { role, setRole, theme, setTheme, isAuthenticated, logout } = useStore();
+  const { role, setRole, theme, setTheme, isAuthenticated, logout, currentUser } = useStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
@@ -116,7 +116,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <User size={20} />
             </div>
             <div className={styles.userInfo}>
-              <span className={styles.userName}>Alex Johnson</span>
+              <span className={styles.userName}>{currentUser?.name || 'User'}</span>
               <span className={styles.userRole}>{role === 'admin' ? 'Administrator' : 'Viewer'}</span>
             </div>
           </div>
