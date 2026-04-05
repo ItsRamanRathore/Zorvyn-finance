@@ -6,19 +6,28 @@ import { initialTransactions } from '@/utils/mockData';
 import { TransactionTable } from '@/components/transactions/TransactionTable';
 import { TransactionForm } from '@/components/transactions/TransactionForm';
 import { Button } from '@/components/ui/Button';
-import { Plus, Download, ReceiptText } from 'lucide-react';
+import { Plus, Download } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
+import { exportTransactionsToCSV } from '@/utils/export';
+import { DashboardLoading } from '@/components/dashboard/DashboardLoading';
 import styles from '../page.module.css';
 
 export default function TransactionsPage() {
   const { transactions, setTransactions, role } = useStore();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (transactions.length === 0) {
-      setTransactions(initialTransactions);
-    }
+    const timer = setTimeout(() => {
+      if (transactions.length === 0) {
+        setTransactions(initialTransactions);
+      }
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [setTransactions, transactions.length]);
+
+  if (isLoading) return <DashboardLoading />;
 
   const isAdmin = role === 'admin';
 
@@ -34,7 +43,7 @@ export default function TransactionsPage() {
         </div>
         
         <div className={styles.pageActions}>
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={() => exportTransactionsToCSV(transactions)}>
             <Download size={18} />
             <span>Export CSV</span>
           </Button>

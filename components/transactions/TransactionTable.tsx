@@ -12,7 +12,9 @@ import {
   ArrowDownCircle,
   Calendar,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  RotateCcw,
+  Bell
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import clsx from 'clsx';
@@ -113,7 +115,17 @@ export const TransactionTable: React.FC = () => {
                 >
                   <td>
                     <div className={styles.descriptionCell}>
-                      <span className={styles.descriptionText}>{t.description}</span>
+                      <div className={styles.descriptionRow}>
+                        <span className={styles.descriptionText}>{t.description}</span>
+                        <div className={styles.statusIcons}>
+                          {t.isRecurring && (
+                            <RotateCcw size={12} className={styles.recurringIcon} />
+                          )}
+                          {t.remindersEnabled && (
+                            <Bell size={12} className={styles.reminderIcon} />
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td>

@@ -1,23 +1,31 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from '@/store/useStore';
 import { initialTransactions } from '@/utils/mockData';
 import { MonthlyBarChart } from '@/components/analytics/MonthlyBarChart';
 import { SpendingBreakdown } from '@/components/dashboard/SpendingBreakdown';
 import { SummaryCards } from '@/components/dashboard/SummaryCards';
 import { Card } from '@/components/ui/Card';
-import { TrendingUp, PieChart, BarChart3, ArrowRight } from 'lucide-react';
+import { TrendingUp, BarChart3, ArrowRight } from 'lucide-react';
+import { DashboardLoading } from '@/components/dashboard/DashboardLoading';
 import styles from '../page.module.css';
 
 export default function AnalyticsPage() {
   const { transactions, setTransactions } = useStore();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (transactions.length === 0) {
-      setTransactions(initialTransactions);
-    }
+    const timer = setTimeout(() => {
+      if (transactions.length === 0) {
+        setTransactions(initialTransactions);
+      }
+      setIsLoading(false);
+    }, 1200);
+    return () => clearTimeout(timer);
   }, [setTransactions, transactions.length]);
+
+  if (isLoading) return <DashboardLoading />;
 
   return (
     <div className={styles.container}>

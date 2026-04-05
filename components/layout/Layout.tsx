@@ -13,7 +13,9 @@ import {
   Menu,
   X,
   ShieldCheck,
-  Eye
+  Eye,
+  Sun,
+  Moon
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,10 +27,14 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { role, setRole } = useStore();
+  const { role, setRole, theme, setTheme } = useStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -128,6 +134,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </button>
 
           <div className={styles.headerRight}>
+            <button 
+              className={styles.themeToggle} 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className={styles.roleSwitcher}>
               <div className={styles.switcherIcon}>
                 {role === 'admin' ? <ShieldCheck size={18} /> : <Eye size={18} />}

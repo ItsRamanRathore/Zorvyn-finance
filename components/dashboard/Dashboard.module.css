@@ -94,3 +94,151 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Recurring Payments Specific Styles */
+.recurringCard {
+  grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+}
+
+.badge {
+  background: var(--primary-muted);
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.recurringList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.recurringList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.recurringList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recurringList::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+.recurringItem {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.recurringItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary-muted);
+  transform: translateX(4px);
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.itemTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itemDescription {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.itemFrequency {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.weekly { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+.monthly { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+
+.itemMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metaLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.itemAmount {
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.income { color: #10b981; }
+.expense { color: #ef4444; }
+
+.reminderToggle {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 1rem;
+}
+
+.reminderToggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--foreground);
+}
+
+.reminderActive {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #f59e0b !important;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.emptyIcon {
+  opacity: 0.2;
+}

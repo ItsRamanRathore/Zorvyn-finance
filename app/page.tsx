@@ -4,27 +4,41 @@ import React, { useEffect, useState } from 'react';
 import { SummaryCards } from '@/components/dashboard/SummaryCards';
 import { BalanceTrend } from '@/components/dashboard/BalanceTrend';
 import { SpendingBreakdown } from '@/components/dashboard/SpendingBreakdown';
+import { RecurringPayments } from '@/components/dashboard/RecurringPayments';
 import { InsightsSection } from '@/components/dashboard/InsightsSection';
 import { TransactionTable } from '@/components/transactions/TransactionTable';
 import { TransactionForm } from '@/components/transactions/TransactionForm';
 import { Button } from '@/components/ui/Button';
 import { useStore } from '@/store/useStore';
 import { initialTransactions } from '@/utils/mockData';
-import { Plus } from 'lucide-react';
+import { exportTransactionsToCSV } from '@/utils/export';
+import { Plus, Download } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { DashboardLoading } from '@/components/dashboard/DashboardLoading';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
   const { setTransactions, transactions, role } = useStore();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (transactions.length === 0) {
-      setTransactions(initialTransactions);
-    }
+    // Simulate initial data fetching
+    const timer = setTimeout(() => {
+      if (transactions.length === 0) {
+        setTransactions(initialTransactions);
+      }
+      setIsLoading(false);
+    }, 1500);
+    
+    return () => clearTimeout(timer);
   }, [setTransactions, transactions.length]);
 
   const isAdmin = role === 'admin';
+
+  if (isLoading) {
+    return <DashboardLoading />;
+  }
 
   return (
     <div className={styles.container}>
@@ -34,15 +48,21 @@ export default function DashboardPage() {
           <p className={styles.subtitle}>Welcome back, Alex. Here's what's happening with your money.</p>
         </div>
         
-        {isAdmin && (
-          <Button 
-            onClick={() => setIsFormOpen(true)}
-            className={styles.addBtn}
-          >
-            <Plus size={18} />
-            <span>Add Transaction</span>
+        <div className={styles.pageActions}>
+          <Button variant="secondary" onClick={() => exportTransactionsToCSV(transactions)}>
+            <Download size={18} />
+            <span>Export CSV</span>
           </Button>
-        )}
+          {isAdmin && (
+            <Button 
+              onClick={() => setIsFormOpen(true)}
+              className={styles.addBtn}
+            >
+              <Plus size={18} />
+              <span>Add Transaction</span>
+            </Button>
+          )}
+        </div>
       </header>
 
       <SummaryCards />
@@ -50,6 +70,7 @@ export default function DashboardPage() {
       <div className={styles.chartsGrid}>
         <BalanceTrend />
         <SpendingBreakdown />
+        <RecurringPayments />
       </div>
 
       <InsightsSection />

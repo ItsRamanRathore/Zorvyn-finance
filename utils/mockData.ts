@@ -26,6 +26,10 @@ export const generateMockTransactions = (count: number = 20): Transaction[] => {
       ? 2000 + Math.random() * 3000 
       : 10 + Math.random() * 200;
     
+    const isRecurring = i % 7 === 0;
+    const frequency = isRecurring ? (i % 2 === 0 ? 'monthly' : 'weekly') : undefined;
+    const remindersEnabled = isRecurring && i % 3 === 0;
+
     transactions.push({
       id: uuidv4(),
       date: format(subDays(new Date(), Math.floor(Math.random() * 30)), 'yyyy-MM-dd'),
@@ -33,6 +37,9 @@ export const generateMockTransactions = (count: number = 20): Transaction[] => {
       category,
       description: `${category} payment #${i + 1}`,
       type,
+      isRecurring,
+      frequency,
+      remindersEnabled,
     });
   }
   

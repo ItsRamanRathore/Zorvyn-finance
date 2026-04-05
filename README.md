@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zorvyn Finance Dashboard 📊
 
-## Getting Started
+Zorvyn is a professional, high-performance finance management dashboard built with **Next.js 16**, **TypeScript**, and **Framer Motion**. It provides users with deep insights into their spending habits, income trends, and budget management with a sleek, premium **Glassmorphism** interface.
 
-First, run the development server:
+## ✨ Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. Unified Dashboard
+- **Financial Summary**: Real-time cards for Total Balance, Monthly Income, Expenses, and Savings Rate.
+- **Balance Trend**: Interactive Area Chart (Recharts) visualizing financial growth over the last 30 days.
+- **Spending Breakdown**: Categorical analysis using Donut charts to identify top expense areas.
+- **Data-Driven Insights**: Automated observations on spending patterns and growth projections.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Advanced Transaction Management
+- **Interactive Ledger**: A high-performance table with instant searching, categorical filtering, and multi-column sorting.
+- **Management Suite**: Admin-level users can add and delete transactions with full form validation and submission feedback.
+- **Data Portability**: Functional **CSV Export** utility to download your financial logs for external use.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Smart Budgeting & Settings
+- **Budget Manager**: Visual progress bars tracking monthly spending limits per category with "Over-Budget" alerts.
+- **Theme Engine**: Seamless **Dark/Light Mode** switching that persists across sessions.
+- **Profile Hub**: Comprehensive settings for user profile management and security preferences.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Enterprise-Grade User Experience
+- **RBAC (Role-Based Access Control)**: Simulated Admin vs. Viewer roles, dynamically restricting UI actions based on permissions.
+- **Superior Performance**: Perceived performance optimized with **Skeleton Loaders** and hardware-accelerated animations.
+- **State Persistence**: Full state synchronization with `LocalStorage` using Zustand for a modern SPA feel.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack & Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Core Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand) (with Persistence Middleware)
+- **Visuals & Charts**: [Recharts](https://recharts.org/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Styling**: Vanilla **CSS Modules** (for zero-runtime overhead and complete design control)
+- **Date Handling**: [date-fns](https://date-fns.org/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Why this stack?
+- **Next.js** was chosen for its best-in-class server components and Vercel-native optimizations.
+- **Zustand** provides a significantly lighter and faster state management experience compared to Redux, perfect for reactive dashboards.
+- **CSS Modules** were used instead of Tailwind to demonstrate a deep understanding of core CSS architecture, modularity, and custom design systems.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+- Node.js 18.x or later
+- npm or yarn
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd zorvyn-finance
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🛡️ RBAC Simulation (Judges Guide)
+
+To demonstrate the **Role-Based UI**, use the switcher located in the top-right header:
+- **Admin**: Full access. You can see the "Add Transaction" button and the delete icons in the transaction table.
+- **Viewer**: Read-only access. Management actions are automatically hidden from the UI to prevent unauthorized data mutation.
+
+---
+
+*Built with ❤️ for the Frontend Development Assignment.*
