@@ -15,10 +15,11 @@ import { exportTransactionsToCSV } from '@/utils/export';
 import { Plus, Download } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { DashboardLoading } from '@/components/dashboard/DashboardLoading';
+import { LandingPage } from '@/components/welcome/LandingPage';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
-  const { setTransactions, transactions, role } = useStore();
+  const { setTransactions, transactions, role, isAuthenticated } = useStore();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,6 +39,10 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return <DashboardLoading />;
+  }
+
+  if (!isAuthenticated) {
+    return <LandingPage />;
   }
 
   return (

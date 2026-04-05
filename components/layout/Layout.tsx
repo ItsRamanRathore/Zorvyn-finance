@@ -27,7 +27,7 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { role, setRole, theme, setTheme } = useStore();
+  const { role, setRole, theme, setTheme, isAuthenticated, logout } = useStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
@@ -57,6 +57,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: 'Analytics', href: '/analytics', icon: TrendingUp },
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
+
+  if (!isAuthenticated) {
+    return <>{children}</>;
+  }
 
   return (
     <div className={styles.container}>
@@ -116,7 +120,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span className={styles.userRole}>{role === 'admin' ? 'Administrator' : 'Viewer'}</span>
             </div>
           </div>
-          <button className={styles.logoutBtn}>
+          <button className={styles.logoutBtn} onClick={() => logout()}>
             <LogOut size={18} />
             <span>Sign Out</span>
           </button>

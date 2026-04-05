@@ -7,6 +7,7 @@ interface ButtonProps extends HTMLMotionProps<'button'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  fullWidth?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({ 
@@ -14,6 +15,7 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary', 
   size = 'md', 
   isLoading = false,
+  fullWidth = false,
   className,
   ...props 
 }) => {
@@ -26,6 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
         styles[variant],
         styles[size],
         isLoading && styles.loading,
+        fullWidth && styles.fullWidth,
         className
       )}
       disabled={isLoading || props.disabled}

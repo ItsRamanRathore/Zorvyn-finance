@@ -31,3 +31,12 @@ export interface CategoryData {
   name: string;
   value: number;
 }
+
+export interface UserAccount {
+  id: string;
+  name: string;
+  email: string;
+  password?: string; // Optional for security in some contexts
+  role: Role;
+  createdAt: string;
+}
