@@ -17,7 +17,9 @@ import {
   Layers,
   Rocket,
   Menu,
-  X
+  X,
+  FileText,
+  Scale
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { AuthModal } from '../auth/AuthModal';
@@ -387,6 +389,40 @@ export const LandingPage: React.FC = () => {
           <div className={styles.securityShield}>
             <Shield size={120} />
           </div>
+        </motion.div>
+      </section>
+
+      {/* Legal & Privacy Section */}
+      <section id="legal" className={styles.legal}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Trust & Transparency</h2>
+          <p className={styles.sectionSubtitle}>
+            We believe in complete transparency. Our terms and privacy policies are designed to protect you.
+          </p>
+        </div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          variants={staggerContainer}
+          viewport={{ once: true }}
+          className={styles.legalGrid}
+        >
+          <motion.div variants={fadeInUp} className={styles.legalCard}>
+            <div className={styles.legalIcon}><FileText size={24} /></div>
+            <h3>Terms of Service</h3>
+            <p>
+              Your rights are protected. You maintain total ownership of your financial data. We do not engage in hidden fees, third-party data selling, or unauthorized access strictly adhering to our service obligations. Use Zorvyn with complete confidence.
+            </p>
+          </motion.div>
+          
+          <motion.div variants={fadeInUp} className={styles.legalCard}>
+            <div className={styles.legalIcon}><Scale size={24} /></div>
+            <h3>Privacy Policy</h3>
+            <p>
+              Your privacy is our highest mandate. All sensitive information is hashed and encrypted locally before it ever reaches our servers. We adhere to global data protection regulations including GDPR and CCPA, ensuring your financial footprint remains completely anonymous.
+            </p>
+          </motion.div>
         </motion.div>
       </section>
 
